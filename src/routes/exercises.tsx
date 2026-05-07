@@ -20,10 +20,10 @@ function Exercises() {
     <div className="space-y-5">
       <h1 className="text-2xl font-extrabold">{t("exercises")}</h1>
       <div className="space-y-3">
-        {items.map(({ key, icon: Icon, color, title, desc }) => (
+        {items.map(({ key, to, icon: Icon, color, title, desc }) => (
           <Link
             key={key}
-            to="/videos"
+            to={to}
             className="group flex items-center gap-4 rounded-2xl bg-card shadow-card p-4 hover:shadow-soft transition"
           >
             <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center text-white shadow-soft`}>
