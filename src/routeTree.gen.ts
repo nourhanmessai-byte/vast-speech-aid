@@ -13,8 +13,10 @@ import { Route as VideosRouteImport } from './routes/videos'
 import { Route as TherapistRouteImport } from './routes/therapist'
 import { Route as RecordRouteImport } from './routes/record'
 import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as ExercisesRouteImport } from './routes/exercises'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FoodsIdRouteImport } from './routes/foods.$id'
 
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
@@ -36,6 +38,11 @@ const ProgressRoute = ProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FoodsRoute = FoodsRouteImport.update({
+  id: '/foods',
+  path: '/foods',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExercisesRoute = ExercisesRouteImport.update({
   id: '/exercises',
   path: '/exercises',
@@ -46,56 +53,80 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FoodsIdRoute = FoodsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => FoodsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRoute
+  '/foods': typeof FoodsRouteWithChildren
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
   '/videos': typeof VideosRoute
+  '/foods/$id': typeof FoodsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRoute
+  '/foods': typeof FoodsRouteWithChildren
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
   '/videos': typeof VideosRoute
+  '/foods/$id': typeof FoodsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRoute
+  '/foods': typeof FoodsRouteWithChildren
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
   '/videos': typeof VideosRoute
+  '/foods/$id': typeof FoodsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/exercises'
+    | '/foods'
     | '/progress'
     | '/record'
     | '/therapist'
     | '/videos'
+    | '/foods/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/exercises' | '/progress' | '/record' | '/therapist' | '/videos'
+  to:
+    | '/'
+    | '/exercises'
+    | '/foods'
+    | '/progress'
+    | '/record'
+    | '/therapist'
+    | '/videos'
+    | '/foods/$id'
   id:
     | '__root__'
     | '/'
     | '/exercises'
+    | '/foods'
     | '/progress'
     | '/record'
     | '/therapist'
     | '/videos'
+    | '/foods/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExercisesRoute: typeof ExercisesRoute
+  FoodsRoute: typeof FoodsRouteWithChildren
   ProgressRoute: typeof ProgressRoute
   RecordRoute: typeof RecordRoute
   TherapistRoute: typeof TherapistRoute
@@ -132,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/foods': {
+      id: '/foods'
+      path: '/foods'
+      fullPath: '/foods'
+      preLoaderRoute: typeof FoodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/exercises': {
       id: '/exercises'
       path: '/exercises'
@@ -146,12 +184,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/foods/$id': {
+      id: '/foods/$id'
+      path: '/$id'
+      fullPath: '/foods/$id'
+      preLoaderRoute: typeof FoodsIdRouteImport
+      parentRoute: typeof FoodsRoute
+    }
   }
 }
+
+interface FoodsRouteChildren {
+  FoodsIdRoute: typeof FoodsIdRoute
+}
+
+const FoodsRouteChildren: FoodsRouteChildren = {
+  FoodsIdRoute: FoodsIdRoute,
+}
+
+const FoodsRouteWithChildren = FoodsRoute._addFileChildren(FoodsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExercisesRoute: ExercisesRoute,
+  FoodsRoute: FoodsRouteWithChildren,
   ProgressRoute: ProgressRoute,
   RecordRoute: RecordRoute,
   TherapistRoute: TherapistRoute,

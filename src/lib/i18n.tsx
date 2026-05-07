@@ -50,6 +50,15 @@ const dict = {
   practice: { en: "Practice", ar: "تمرّن" },
   listen: { en: "Listen", ar: "استمع" },
   goodJob: { en: "Great progress!", ar: "تقدم رائع!" },
+  fruitsVeg: { en: "Fruits & Vegetables", ar: "الفواكه والخضر" },
+  fruitsVegDesc: { en: "Name common fruits and vegetables", ar: "تسمية الفواكه والخضروات الشائعة" },
+  fruits: { en: "Fruits", ar: "فواكه" },
+  vegetables: { en: "Vegetables", ar: "خضروات" },
+  tapToOpen: { en: "Tap to practice", ar: "اضغط للتدرب" },
+  watchMouth: { en: "Watch the mouth", ar: "راقب حركة الفم" },
+  next: { en: "Next", ar: "التالي" },
+  back: { en: "Back", ar: "رجوع" },
+  pronunciation: { en: "Pronunciation", ar: "النطق" },
 };
 
 type Key = keyof typeof dict;

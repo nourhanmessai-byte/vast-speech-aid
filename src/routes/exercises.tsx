@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
-import { Type, Music2, BookA, MessageSquare, MessagesSquare, ChevronRight } from "lucide-react";
+import { Type, Music2, BookA, MessageSquare, MessagesSquare, Apple, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/exercises")({
   component: Exercises,
@@ -9,20 +9,21 @@ export const Route = createFileRoute("/exercises")({
 function Exercises() {
   const { t } = useI18n();
   const items = [
-    { key: "letters", icon: Type, color: "from-violet-400 to-indigo-400", title: t("letters"), desc: t("letterDesc") },
-    { key: "syllables", icon: Music2, color: "from-fuchsia-400 to-violet-400", title: t("syllables"), desc: t("syllableDesc") },
-    { key: "words", icon: BookA, color: "from-indigo-400 to-sky-400", title: t("words"), desc: t("wordDesc") },
-    { key: "sentences", icon: MessageSquare, color: "from-purple-400 to-pink-400", title: t("sentences"), desc: t("sentenceDesc") },
-    { key: "conversation", icon: MessagesSquare, color: "from-violet-500 to-purple-400", title: t("conversation"), desc: t("convDesc") },
+    { key: "foods", to: "/foods" as const, icon: Apple, color: "from-rose-400 to-amber-400", title: t("fruitsVeg"), desc: t("fruitsVegDesc") },
+    { key: "letters", to: "/videos" as const, icon: Type, color: "from-violet-400 to-indigo-400", title: t("letters"), desc: t("letterDesc") },
+    { key: "syllables", to: "/videos" as const, icon: Music2, color: "from-fuchsia-400 to-violet-400", title: t("syllables"), desc: t("syllableDesc") },
+    { key: "words", to: "/videos" as const, icon: BookA, color: "from-indigo-400 to-sky-400", title: t("words"), desc: t("wordDesc") },
+    { key: "sentences", to: "/videos" as const, icon: MessageSquare, color: "from-purple-400 to-pink-400", title: t("sentences"), desc: t("sentenceDesc") },
+    { key: "conversation", to: "/videos" as const, icon: MessagesSquare, color: "from-violet-500 to-purple-400", title: t("conversation"), desc: t("convDesc") },
   ];
   return (
     <div className="space-y-5">
       <h1 className="text-2xl font-extrabold">{t("exercises")}</h1>
       <div className="space-y-3">
-        {items.map(({ key, icon: Icon, color, title, desc }) => (
+        {items.map(({ key, to, icon: Icon, color, title, desc }) => (
           <Link
             key={key}
-            to="/videos"
+            to={to}
             className="group flex items-center gap-4 rounded-2xl bg-card shadow-card p-4 hover:shadow-soft transition"
           >
             <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center text-white shadow-soft`}>
