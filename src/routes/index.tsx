@@ -35,6 +35,22 @@ function Home() {
         />
       </section>
 
+      <Link
+        to="/foods"
+        className="block rounded-3xl bg-card shadow-card p-4 hover:shadow-soft transition active:scale-[0.99]"
+      >
+        <div className="flex items-center gap-3">
+          <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-rose-200 to-amber-100 flex items-center justify-center text-2xl">
+            🍎
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="font-extrabold text-sm">{t("fruitsVeg")}</div>
+            <div className="text-[11px] text-muted-foreground truncate">{t("fruitsVegDesc")}</div>
+          </div>
+          <Arrow className="h-4 w-4 text-brand" />
+        </div>
+      </Link>
+
       <section className="grid grid-cols-2 gap-3">
         <StatCard icon={Flame} label={t("dailyExercises")} value="3 / 5" hint={t("exercisesDone")} />
         <StatCard icon={Trophy} label={t("fluencyScore")} value="78%" hint={t("goodJob")} />
