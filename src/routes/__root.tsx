@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { I18nProvider } from "@/lib/i18n";
+import { AppShell } from "@/components/AppShell";
 
 function NotFoundComponent() {
   return (
@@ -72,8 +74,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "VAST Speech — Video-Assisted Speech Therapy" },
+      { name: "description", content: "Bilingual rehabilitation app for Broca aphasia patients with VAST." },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Lovable App" },
       { property: "og:description", content: "Lovable Generated Project" },
@@ -113,7 +115,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <I18nProvider>
+        <AppShell />
+      </I18nProvider>
     </QueryClientProvider>
   );
 }
+

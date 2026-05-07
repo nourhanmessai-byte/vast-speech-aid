@@ -2,6 +2,8 @@
 @source "../src";
 @import "tw-animate-css";
 
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap");
+
 @custom-variant dark (&:is(.dark *));
 
 /*
@@ -61,16 +63,35 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme inline {
+  --font-sans: "Plus Jakarta Sans", "Tajawal", system-ui, sans-serif;
+  --font-arabic: "Tajawal", "Plus Jakarta Sans", system-ui, sans-serif;
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
+  --color-success: var(--success);
+}
+
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 1rem;
+  --background: oklch(0.995 0.005 290);
+  --foreground: oklch(0.22 0.05 280);
+
+  --brand: oklch(0.62 0.16 280);
+  --brand-foreground: oklch(0.99 0.005 290);
+  --brand-soft: oklch(0.82 0.08 295);
+  --success: oklch(0.72 0.15 160);
+
+  --gradient-brand: linear-gradient(135deg, oklch(0.65 0.16 275), oklch(0.78 0.11 305));
+  --gradient-soft: linear-gradient(160deg, oklch(0.97 0.025 290), oklch(0.94 0.04 305));
+  --shadow-soft: 0 10px 30px -12px oklch(0.62 0.16 280 / 0.25);
+  --shadow-card: 0 4px 18px -8px oklch(0.62 0.16 280 / 0.18);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.62 0.16 280);
+  --primary-foreground: oklch(0.99 0.005 290);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
@@ -140,5 +161,36 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic);
   }
 }
+
+@layer utilities {
+  .bg-gradient-brand { background-image: var(--gradient-brand); }
+  .bg-gradient-soft { background-image: var(--gradient-soft); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .text-gradient-brand {
+    background-image: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 oklch(0.62 0.16 280 / 0.4); }
+  70% { box-shadow: 0 0 0 18px oklch(0.62 0.16 280 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(0.62 0.16 280 / 0); }
+}
+.animate-float { animation: float-slow 4s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+
