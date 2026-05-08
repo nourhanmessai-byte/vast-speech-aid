@@ -35,21 +35,28 @@ function Home() {
         />
       </section>
 
-      <Link
-        to="/foods"
-        className="block rounded-3xl bg-card shadow-card p-4 hover:shadow-soft transition active:scale-[0.99]"
-      >
-        <div className="flex items-center gap-3">
+      <div className="grid grid-cols-2 gap-3">
+        <Link
+          to="/fruits"
+          className="block rounded-3xl bg-card shadow-card p-4 hover:shadow-soft transition active:scale-[0.99]"
+        >
           <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-rose-200 to-amber-100 flex items-center justify-center text-2xl">
             🍎
           </div>
-          <div className="flex-1 min-w-0">
-            <div className="font-extrabold text-sm">{t("fruitsVeg")}</div>
-            <div className="text-[11px] text-muted-foreground truncate">{t("fruitsVegDesc")}</div>
+          <div className="mt-3 font-extrabold text-sm">{t("fruits")}</div>
+          <div className="text-[11px] text-muted-foreground truncate">{t("fruitsDesc")}</div>
+        </Link>
+        <Link
+          to="/legumes"
+          className="block rounded-3xl bg-card shadow-card p-4 hover:shadow-soft transition active:scale-[0.99]"
+        >
+          <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-200 to-lime-100 flex items-center justify-center text-2xl">
+            🥕
           </div>
-          <Arrow className="h-4 w-4 text-brand" />
-        </div>
-      </Link>
+          <div className="mt-3 font-extrabold text-sm">{t("vegetables")}</div>
+          <div className="text-[11px] text-muted-foreground truncate">{t("vegetablesDesc")}</div>
+        </Link>
+      </div>
 
       <section className="grid grid-cols-2 gap-3">
         <StatCard icon={Flame} label={t("dailyExercises")} value="3 / 5" hint={t("exercisesDone")} />
