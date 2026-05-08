@@ -28,11 +28,11 @@ export function AppShell() {
             </div>
           </Link>
           <button
-            onClick={() => setLang(lang === "en" ? "ar" : "en")}
+            onClick={() => setLang(lang === "fr" ? "ar" : "fr")}
             className="flex items-center gap-1.5 rounded-full bg-card shadow-card px-3 py-1.5 text-xs font-semibold text-foreground/80 hover:text-brand transition"
           >
             <Languages className="h-3.5 w-3.5" />
-            {lang === "en" ? "العربية" : "English"}
+            {lang === "fr" ? "العربية" : "Français"}
           </button>
         </div>
       </header>

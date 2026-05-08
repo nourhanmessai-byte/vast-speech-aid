@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
-import { Type, Music2, BookA, MessageSquare, MessagesSquare, Apple, ChevronRight } from "lucide-react";
+import { Type, Music2, BookA, MessageSquare, MessagesSquare, Apple, Carrot, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/exercises")({
   component: Exercises,
@@ -9,7 +9,8 @@ export const Route = createFileRoute("/exercises")({
 function Exercises() {
   const { t } = useI18n();
   const items = [
-    { key: "foods", to: "/foods" as const, icon: Apple, color: "from-rose-400 to-amber-400", title: t("fruitsVeg"), desc: t("fruitsVegDesc") },
+    { key: "fruits", to: "/fruits" as const, icon: Apple, color: "from-rose-400 to-amber-400", title: t("fruits"), desc: t("fruitsDesc") },
+    { key: "vegetables", to: "/legumes" as const, icon: Carrot, color: "from-emerald-400 to-lime-400", title: t("vegetables"), desc: t("vegetablesDesc") },
     { key: "letters", to: "/videos" as const, icon: Type, color: "from-violet-400 to-indigo-400", title: t("letters"), desc: t("letterDesc") },
     { key: "syllables", to: "/videos" as const, icon: Music2, color: "from-fuchsia-400 to-violet-400", title: t("syllables"), desc: t("syllableDesc") },
     { key: "words", to: "/videos" as const, icon: BookA, color: "from-indigo-400 to-sky-400", title: t("words"), desc: t("wordDesc") },

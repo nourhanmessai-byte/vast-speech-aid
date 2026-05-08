@@ -30,7 +30,7 @@ function Record() {
 
       <div className="rounded-3xl bg-card shadow-card p-6 text-center">
         <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">{t("target")}</div>
-        <div className="text-3xl font-extrabold text-gradient-brand">"Hello"</div>
+        <div className="text-3xl font-extrabold text-gradient-brand">« Bonjour »</div>
         <button className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-brand">
           <Volume2 className="h-4 w-4" /> {t("listen")}
         </button>

@@ -13,6 +13,8 @@ import { Route as VideosRouteImport } from './routes/videos'
 import { Route as TherapistRouteImport } from './routes/therapist'
 import { Route as RecordRouteImport } from './routes/record'
 import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as LegumesRouteImport } from './routes/legumes'
+import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as ExercisesRouteImport } from './routes/exercises'
 import { Route as IndexRouteImport } from './routes/index'
@@ -36,6 +38,16 @@ const RecordRoute = RecordRouteImport.update({
 const ProgressRoute = ProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegumesRoute = LegumesRouteImport.update({
+  id: '/legumes',
+  path: '/legumes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FruitsRoute = FruitsRouteImport.update({
+  id: '/fruits',
+  path: '/fruits',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FoodsRoute = FoodsRouteImport.update({
@@ -63,6 +75,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
+  '/fruits': typeof FruitsRoute
+  '/legumes': typeof LegumesRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
@@ -73,6 +87,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
+  '/fruits': typeof FruitsRoute
+  '/legumes': typeof LegumesRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
@@ -84,6 +100,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
+  '/fruits': typeof FruitsRoute
+  '/legumes': typeof LegumesRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
@@ -96,6 +114,8 @@ export interface FileRouteTypes {
     | '/'
     | '/exercises'
     | '/foods'
+    | '/fruits'
+    | '/legumes'
     | '/progress'
     | '/record'
     | '/therapist'
@@ -106,6 +126,8 @@ export interface FileRouteTypes {
     | '/'
     | '/exercises'
     | '/foods'
+    | '/fruits'
+    | '/legumes'
     | '/progress'
     | '/record'
     | '/therapist'
@@ -116,6 +138,8 @@ export interface FileRouteTypes {
     | '/'
     | '/exercises'
     | '/foods'
+    | '/fruits'
+    | '/legumes'
     | '/progress'
     | '/record'
     | '/therapist'
@@ -127,6 +151,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExercisesRoute: typeof ExercisesRoute
   FoodsRoute: typeof FoodsRouteWithChildren
+  FruitsRoute: typeof FruitsRoute
+  LegumesRoute: typeof LegumesRoute
   ProgressRoute: typeof ProgressRoute
   RecordRoute: typeof RecordRoute
   TherapistRoute: typeof TherapistRoute
@@ -161,6 +187,20 @@ declare module '@tanstack/react-router' {
       path: '/progress'
       fullPath: '/progress'
       preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legumes': {
+      id: '/legumes'
+      path: '/legumes'
+      fullPath: '/legumes'
+      preLoaderRoute: typeof LegumesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fruits': {
+      id: '/fruits'
+      path: '/fruits'
+      fullPath: '/fruits'
+      preLoaderRoute: typeof FruitsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/foods': {
@@ -208,6 +248,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExercisesRoute: ExercisesRoute,
   FoodsRoute: FoodsRouteWithChildren,
+  FruitsRoute: FruitsRoute,
+  LegumesRoute: LegumesRoute,
   ProgressRoute: ProgressRoute,
   RecordRoute: RecordRoute,
   TherapistRoute: TherapistRoute,
