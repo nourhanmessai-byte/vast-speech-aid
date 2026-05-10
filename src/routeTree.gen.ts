@@ -19,6 +19,7 @@ import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as ExercisesRouteImport } from './routes/exercises'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FoodsIdRouteImport } from './routes/foods.$id'
+import { Route as LessonCategoryIdRouteImport } from './routes/lesson.$category.$id'
 
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
@@ -70,6 +71,11 @@ const FoodsIdRoute = FoodsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => FoodsRoute,
 } as any)
+const LessonCategoryIdRoute = LessonCategoryIdRouteImport.update({
+  id: '/lesson/$category/$id',
+  path: '/lesson/$category/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/therapist': typeof TherapistRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/therapist': typeof TherapistRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/therapist': typeof TherapistRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/therapist'
     | '/videos'
     | '/foods/$id'
+    | '/lesson/$category/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/therapist'
     | '/videos'
     | '/foods/$id'
+    | '/lesson/$category/$id'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/therapist'
     | '/videos'
     | '/foods/$id'
+    | '/lesson/$category/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   RecordRoute: typeof RecordRoute
   TherapistRoute: typeof TherapistRoute
   VideosRoute: typeof VideosRoute
+  LessonCategoryIdRoute: typeof LessonCategoryIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FoodsIdRouteImport
       parentRoute: typeof FoodsRoute
     }
+    '/lesson/$category/$id': {
+      id: '/lesson/$category/$id'
+      path: '/lesson/$category/$id'
+      fullPath: '/lesson/$category/$id'
+      preLoaderRoute: typeof LessonCategoryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -254,7 +274,18 @@ const rootRouteChildren: RootRouteChildren = {
   RecordRoute: RecordRoute,
   TherapistRoute: TherapistRoute,
   VideosRoute: VideosRoute,
+  LessonCategoryIdRoute: LessonCategoryIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
