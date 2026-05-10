@@ -92,3 +92,30 @@ function StatCard({ icon: Icon, label, value, hint }: { icon: any; label: string
     </div>
   );
 }
+
+function CategoryCard({
+  to,
+  emoji,
+  tint,
+  title,
+  desc,
+}: {
+  to: "/fruits" | "/legumes" | "/numbers" | "/days" | "/months" | "/verbs";
+  emoji: string;
+  tint: string;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <Link
+      to={to}
+      className="block rounded-3xl bg-card shadow-card p-4 hover:shadow-soft transition active:scale-[0.99]"
+    >
+      <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${tint} flex items-center justify-center text-2xl`}>
+        {emoji}
+      </div>
+      <div className="mt-3 font-extrabold text-sm">{title}</div>
+      <div className="text-[11px] text-muted-foreground truncate">{desc}</div>
+    </Link>
+  );
+}
