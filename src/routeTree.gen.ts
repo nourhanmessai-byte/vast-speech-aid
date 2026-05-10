@@ -10,19 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VideosRouteImport } from './routes/videos'
+import { Route as VerbsRouteImport } from './routes/verbs'
 import { Route as TherapistRouteImport } from './routes/therapist'
 import { Route as RecordRouteImport } from './routes/record'
 import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as NumbersRouteImport } from './routes/numbers'
+import { Route as MonthsRouteImport } from './routes/months'
 import { Route as LegumesRouteImport } from './routes/legumes'
 import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as ExercisesRouteImport } from './routes/exercises'
+import { Route as DaysRouteImport } from './routes/days'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FoodsIdRouteImport } from './routes/foods.$id'
+import { Route as LessonCategoryIdRouteImport } from './routes/lesson.$category.$id'
 
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
   path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerbsRoute = VerbsRouteImport.update({
+  id: '/verbs',
+  path: '/verbs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TherapistRoute = TherapistRouteImport.update({
@@ -38,6 +48,16 @@ const RecordRoute = RecordRouteImport.update({
 const ProgressRoute = ProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NumbersRoute = NumbersRouteImport.update({
+  id: '/numbers',
+  path: '/numbers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MonthsRoute = MonthsRouteImport.update({
+  id: '/months',
+  path: '/months',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegumesRoute = LegumesRouteImport.update({
@@ -60,6 +80,11 @@ const ExercisesRoute = ExercisesRouteImport.update({
   path: '/exercises',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DaysRoute = DaysRouteImport.update({
+  id: '/days',
+  path: '/days',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -70,93 +95,133 @@ const FoodsIdRoute = FoodsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => FoodsRoute,
 } as any)
+const LessonCategoryIdRoute = LessonCategoryIdRouteImport.update({
+  id: '/lesson/$category/$id',
+  path: '/lesson/$category/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
   '/fruits': typeof FruitsRoute
   '/legumes': typeof LegumesRoute
+  '/months': typeof MonthsRoute
+  '/numbers': typeof NumbersRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
+  '/verbs': typeof VerbsRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
   '/fruits': typeof FruitsRoute
   '/legumes': typeof LegumesRoute
+  '/months': typeof MonthsRoute
+  '/numbers': typeof NumbersRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
+  '/verbs': typeof VerbsRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
   '/fruits': typeof FruitsRoute
   '/legumes': typeof LegumesRoute
+  '/months': typeof MonthsRoute
+  '/numbers': typeof NumbersRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
+  '/verbs': typeof VerbsRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/days'
     | '/exercises'
     | '/foods'
     | '/fruits'
     | '/legumes'
+    | '/months'
+    | '/numbers'
     | '/progress'
     | '/record'
     | '/therapist'
+    | '/verbs'
     | '/videos'
     | '/foods/$id'
+    | '/lesson/$category/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/days'
     | '/exercises'
     | '/foods'
     | '/fruits'
     | '/legumes'
+    | '/months'
+    | '/numbers'
     | '/progress'
     | '/record'
     | '/therapist'
+    | '/verbs'
     | '/videos'
     | '/foods/$id'
+    | '/lesson/$category/$id'
   id:
     | '__root__'
     | '/'
+    | '/days'
     | '/exercises'
     | '/foods'
     | '/fruits'
     | '/legumes'
+    | '/months'
+    | '/numbers'
     | '/progress'
     | '/record'
     | '/therapist'
+    | '/verbs'
     | '/videos'
     | '/foods/$id'
+    | '/lesson/$category/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DaysRoute: typeof DaysRoute
   ExercisesRoute: typeof ExercisesRoute
   FoodsRoute: typeof FoodsRouteWithChildren
   FruitsRoute: typeof FruitsRoute
   LegumesRoute: typeof LegumesRoute
+  MonthsRoute: typeof MonthsRoute
+  NumbersRoute: typeof NumbersRoute
   ProgressRoute: typeof ProgressRoute
   RecordRoute: typeof RecordRoute
   TherapistRoute: typeof TherapistRoute
+  VerbsRoute: typeof VerbsRoute
   VideosRoute: typeof VideosRoute
+  LessonCategoryIdRoute: typeof LessonCategoryIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -166,6 +231,13 @@ declare module '@tanstack/react-router' {
       path: '/videos'
       fullPath: '/videos'
       preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verbs': {
+      id: '/verbs'
+      path: '/verbs'
+      fullPath: '/verbs'
+      preLoaderRoute: typeof VerbsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/therapist': {
@@ -187,6 +259,20 @@ declare module '@tanstack/react-router' {
       path: '/progress'
       fullPath: '/progress'
       preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/numbers': {
+      id: '/numbers'
+      path: '/numbers'
+      fullPath: '/numbers'
+      preLoaderRoute: typeof NumbersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/months': {
+      id: '/months'
+      path: '/months'
+      fullPath: '/months'
+      preLoaderRoute: typeof MonthsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legumes': {
@@ -217,6 +303,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExercisesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/days': {
+      id: '/days'
+      path: '/days'
+      fullPath: '/days'
+      preLoaderRoute: typeof DaysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -230,6 +323,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/foods/$id'
       preLoaderRoute: typeof FoodsIdRouteImport
       parentRoute: typeof FoodsRoute
+    }
+    '/lesson/$category/$id': {
+      id: '/lesson/$category/$id'
+      path: '/lesson/$category/$id'
+      fullPath: '/lesson/$category/$id'
+      preLoaderRoute: typeof LessonCategoryIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -246,14 +346,19 @@ const FoodsRouteWithChildren = FoodsRoute._addFileChildren(FoodsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DaysRoute: DaysRoute,
   ExercisesRoute: ExercisesRoute,
   FoodsRoute: FoodsRouteWithChildren,
   FruitsRoute: FruitsRoute,
   LegumesRoute: LegumesRoute,
+  MonthsRoute: MonthsRoute,
+  NumbersRoute: NumbersRoute,
   ProgressRoute: ProgressRoute,
   RecordRoute: RecordRoute,
   TherapistRoute: TherapistRoute,
+  VerbsRoute: VerbsRoute,
   VideosRoute: VideosRoute,
+  LessonCategoryIdRoute: LessonCategoryIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

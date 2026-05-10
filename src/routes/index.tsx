@@ -36,26 +36,12 @@ function Home() {
       </section>
 
       <div className="grid grid-cols-2 gap-3">
-        <Link
-          to="/fruits"
-          className="block rounded-3xl bg-card shadow-card p-4 hover:shadow-soft transition active:scale-[0.99]"
-        >
-          <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-rose-200 to-amber-100 flex items-center justify-center text-2xl">
-            🍎
-          </div>
-          <div className="mt-3 font-extrabold text-sm">{t("fruits")}</div>
-          <div className="text-[11px] text-muted-foreground truncate">{t("fruitsDesc")}</div>
-        </Link>
-        <Link
-          to="/legumes"
-          className="block rounded-3xl bg-card shadow-card p-4 hover:shadow-soft transition active:scale-[0.99]"
-        >
-          <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-200 to-lime-100 flex items-center justify-center text-2xl">
-            🥕
-          </div>
-          <div className="mt-3 font-extrabold text-sm">{t("vegetables")}</div>
-          <div className="text-[11px] text-muted-foreground truncate">{t("vegetablesDesc")}</div>
-        </Link>
+        <CategoryCard to="/fruits" emoji="🍎" tint="from-rose-200 to-amber-100" title={t("fruits")} desc={t("fruitsDesc")} />
+        <CategoryCard to="/legumes" emoji="🥕" tint="from-emerald-200 to-lime-100" title={t("vegetables")} desc={t("vegetablesDesc")} />
+        <CategoryCard to="/numbers" emoji="🔢" tint="from-violet-200 to-indigo-100" title={t("numbers")} desc={t("numbersDesc")} />
+        <CategoryCard to="/days" emoji="📅" tint="from-sky-200 to-violet-100" title={t("days")} desc={t("daysDesc")} />
+        <CategoryCard to="/months" emoji="🗓️" tint="from-pink-200 to-violet-100" title={t("months")} desc={t("monthsDesc")} />
+        <CategoryCard to="/verbs" emoji="🏃" tint="from-emerald-200 to-violet-100" title={t("verbs")} desc={t("verbsDesc")} />
       </div>
 
       <section className="grid grid-cols-2 gap-3">
@@ -104,5 +90,32 @@ function StatCard({ icon: Icon, label, value, hint }: { icon: any; label: string
       <div className="mt-2 text-2xl font-extrabold">{value}</div>
       <div className="text-[11px] text-muted-foreground mt-0.5">{hint}</div>
     </div>
+  );
+}
+
+function CategoryCard({
+  to,
+  emoji,
+  tint,
+  title,
+  desc,
+}: {
+  to: "/fruits" | "/legumes" | "/numbers" | "/days" | "/months" | "/verbs";
+  emoji: string;
+  tint: string;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <Link
+      to={to}
+      className="block rounded-3xl bg-card shadow-card p-4 hover:shadow-soft transition active:scale-[0.99]"
+    >
+      <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${tint} flex items-center justify-center text-2xl`}>
+        {emoji}
+      </div>
+      <div className="mt-3 font-extrabold text-sm">{title}</div>
+      <div className="text-[11px] text-muted-foreground truncate">{desc}</div>
+    </Link>
   );
 }

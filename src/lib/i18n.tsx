@@ -63,6 +63,14 @@ const dict = {
   pronunciation: { fr: "Prononciation", ar: "النطق" },
   slowMode: { fr: "Mode lent", ar: "وضع بطيء" },
   normalMode: { fr: "Vitesse normale", ar: "سرعة عادية" },
+  numbers: { fr: "Nombres", ar: "الأرقام" },
+  numbersDesc: { fr: "Compter de 1 à 10", ar: "العد من 1 إلى 10" },
+  days: { fr: "Jours de la semaine", ar: "أيام الأسبوع" },
+  daysDesc: { fr: "Nommer les jours de la semaine", ar: "تسمية أيام الأسبوع" },
+  months: { fr: "Mois de l'année", ar: "أشهر السنة" },
+  monthsDesc: { fr: "Nommer les douze mois", ar: "تسمية الأشهر الإثني عشر" },
+  verbs: { fr: "Verbes d'action", ar: "أفعال الحركة" },
+  verbsDesc: { fr: "Verbes courants (test MTA)", ar: "أفعال شائعة (اختبار MTA)" },
 };
 
 type Key = keyof typeof dict;
