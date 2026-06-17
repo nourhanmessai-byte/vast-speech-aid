@@ -74,6 +74,12 @@ const dict = {
   classify: { fr: "Classification", ar: "التصنيف" },
   classifyDesc: { fr: "Classer les objets : fruits, légumes, vêtements", ar: "صنّف الأشياء: فواكه، خضر، ملابس" },
   clothing: { fr: "Vêtements", ar: "الملابس" },
+  animals: { fr: "Animaux", ar: "الحيوانات" },
+  animalsDesc: { fr: "Nommer les animaux courants", ar: "تسمية الحيوانات الشائعة" },
+  furniture: { fr: "Meubles", ar: "الأثاث" },
+  furnitureDesc: { fr: "Nommer les meubles de la maison", ar: "تسمية أثاث المنزل" },
+  objects: { fr: "Objets", ar: "الأشياء" },
+  objectsDesc: { fr: "Nommer les objets du quotidien", ar: "تسمية الأشياء اليومية" },
 };
 
 type Key = keyof typeof dict;

@@ -8,11 +8,42 @@ import open from "@/assets/verbs/open.jpg";
 import close from "@/assets/verbs/close.jpg";
 import sit from "@/assets/verbs/sit.jpg";
 import stand from "@/assets/verbs/stand.jpg";
+import cat from "@/assets/animals/cat.jpg";
+import dog from "@/assets/animals/dog.jpg";
+import bird from "@/assets/animals/bird.jpg";
+import animalFish from "@/assets/animals/fish.jpg";
+import horse from "@/assets/animals/horse.jpg";
+import cow from "@/assets/animals/cow.jpg";
+import sheep from "@/assets/animals/sheep.jpg";
+import rabbit from "@/assets/animals/rabbit.jpg";
+import chair from "@/assets/furniture/chair.jpg";
+import furnTable from "@/assets/furniture/table.jpg";
+import bed from "@/assets/furniture/bed.jpg";
+import wardrobe from "@/assets/furniture/wardrobe.jpg";
+import sofa from "@/assets/furniture/sofa.jpg";
+import lamp from "@/assets/furniture/lamp.jpg";
+import pen from "@/assets/objects/pen.jpg";
+import book from "@/assets/objects/book.jpg";
+import key from "@/assets/objects/key.jpg";
+import phone from "@/assets/objects/phone.jpg";
+import watch from "@/assets/objects/watch.jpg";
+import bag from "@/assets/objects/bag.jpg";
 
-export type LessonCategory = "numbers" | "days" | "months" | "verbs";
+export type LessonCategory = "numbers" | "days" | "months" | "verbs" | "animals" | "furniture" | "objects";
 
 export interface LessonItem {
   id: string;
+  fr: string;
+  ar: string;
+  ipa: string;
+  /** Big emoji or symbol shown when no image */
+  symbol?: string;
+  /** Optional illustration */
+  image?: string;
+  /** Tailwind gradient classes for the hero tint */
+  tint: string;
+}
+
   fr: string;
   ar: string;
   ipa: string;
@@ -75,11 +106,43 @@ export const VERBS: LessonItem[] = [
   { id: "stand", fr: "Se lever", ar: "يقف", ipa: "/sə ləve/", image: stand, tint: "from-pink-100 to-rose-50" },
 ];
 
+export const ANIMALS: LessonItem[] = [
+  { id: "cat", fr: "Chat", ar: "قطة", ipa: "/ʃa/", image: cat, tint: "from-rose-100 to-pink-50" },
+  { id: "dog", fr: "Chien", ar: "كلب", ipa: "/ʃjɛ̃/", image: dog, tint: "from-amber-100 to-orange-50" },
+  { id: "bird", fr: "Oiseau", ar: "عصفور", ipa: "/wazo/", image: bird, tint: "from-sky-100 to-cyan-50" },
+  { id: "fish", fr: "Poisson", ar: "سمكة", ipa: "/pwasɔ̃/", image: animalFish, tint: "from-orange-100 to-amber-50" },
+  { id: "horse", fr: "Cheval", ar: "حصان", ipa: "/ʃəval/", image: horse, tint: "from-amber-100 to-stone-50" },
+  { id: "cow", fr: "Vache", ar: "بقرة", ipa: "/vaʃ/", image: cow, tint: "from-stone-100 to-rose-50" },
+  { id: "sheep", fr: "Mouton", ar: "خروف", ipa: "/mutɔ̃/", image: sheep, tint: "from-pink-100 to-rose-50" },
+  { id: "rabbit", fr: "Lapin", ar: "أرنب", ipa: "/lapɛ̃/", image: rabbit, tint: "from-violet-100 to-pink-50" },
+];
+
+export const FURNITURE: LessonItem[] = [
+  { id: "chair", fr: "Chaise", ar: "كرسي", ipa: "/ʃɛz/", image: chair, tint: "from-amber-100 to-stone-50" },
+  { id: "table", fr: "Table", ar: "طاولة", ipa: "/tabl/", image: furnTable, tint: "from-rose-100 to-amber-50" },
+  { id: "bed", fr: "Lit", ar: "سرير", ipa: "/li/", image: bed, tint: "from-violet-100 to-pink-50" },
+  { id: "wardrobe", fr: "Armoire", ar: "خزانة", ipa: "/aʁmwaʁ/", image: wardrobe, tint: "from-amber-100 to-yellow-50" },
+  { id: "sofa", fr: "Canapé", ar: "أريكة", ipa: "/kanape/", image: sofa, tint: "from-slate-100 to-stone-50" },
+  { id: "lamp", fr: "Lampe", ar: "مصباح", ipa: "/lɑ̃p/", image: lamp, tint: "from-amber-100 to-orange-50" },
+];
+
+export const OBJECTS: LessonItem[] = [
+  { id: "pen", fr: "Stylo", ar: "قلم", ipa: "/stilo/", image: pen, tint: "from-sky-100 to-blue-50" },
+  { id: "book", fr: "Livre", ar: "كتاب", ipa: "/livʁ/", image: book, tint: "from-rose-100 to-pink-50" },
+  { id: "key", fr: "Clé", ar: "مفتاح", ipa: "/kle/", image: key, tint: "from-amber-100 to-yellow-50" },
+  { id: "phone", fr: "Téléphone", ar: "هاتف", ipa: "/telefɔn/", image: phone, tint: "from-pink-100 to-rose-50" },
+  { id: "watch", fr: "Montre", ar: "ساعة", ipa: "/mɔ̃tʁ/", image: watch, tint: "from-stone-100 to-amber-50" },
+  { id: "bag", fr: "Sac", ar: "حقيبة", ipa: "/sak/", image: bag, tint: "from-cyan-100 to-sky-50" },
+];
+
 export const LESSONS: Record<LessonCategory, LessonItem[]> = {
   numbers: NUMBERS,
   days: DAYS,
   months: MONTHS,
   verbs: VERBS,
+  animals: ANIMALS,
+  furniture: FURNITURE,
+  objects: OBJECTS,
 };
 
 export const getLesson = (category: string, id: string): LessonItem | undefined => {
@@ -88,4 +151,6 @@ export const getLesson = (category: string, id: string): LessonItem | undefined 
 };
 
 export const isLessonCategory = (c: string): c is LessonCategory =>
-  c === "numbers" || c === "days" || c === "months" || c === "verbs";
+  c === "numbers" || c === "days" || c === "months" || c === "verbs" ||
+  c === "animals" || c === "furniture" || c === "objects";
+
