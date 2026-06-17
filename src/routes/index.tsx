@@ -43,6 +43,9 @@ function Home() {
         <CategoryCard to="/months" emoji="🗓️" tint="from-pink-200 to-violet-100" title={t("months")} desc={t("monthsDesc")} />
         <CategoryCard to="/verbs" emoji="🏃" tint="from-emerald-200 to-violet-100" title={t("verbs")} desc={t("verbsDesc")} />
         <CategoryCard to="/classify" emoji="🧩" tint="from-violet-200 to-fuchsia-100" title={t("classify")} desc={t("classifyDesc")} />
+        <CategoryCard to="/animals" emoji="🐶" tint="from-amber-200 to-rose-100" title={t("animals")} desc={t("animalsDesc")} />
+        <CategoryCard to="/furniture" emoji="🛋️" tint="from-stone-200 to-amber-100" title={t("furniture")} desc={t("furnitureDesc")} />
+        <CategoryCard to="/objects" emoji="🔑" tint="from-sky-200 to-violet-100" title={t("objects")} desc={t("objectsDesc")} />
       </div>
 
       <section className="grid grid-cols-2 gap-3">
@@ -101,7 +104,7 @@ function CategoryCard({
   title,
   desc,
 }: {
-  to: "/fruits" | "/legumes" | "/numbers" | "/days" | "/months" | "/verbs" | "/classify";
+  to: "/fruits" | "/legumes" | "/numbers" | "/days" | "/months" | "/verbs" | "/classify" | "/animals" | "/furniture" | "/objects";
   emoji: string;
   tint: string;
   title: string;

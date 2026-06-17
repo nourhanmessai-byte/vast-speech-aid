@@ -104,7 +104,7 @@ function LessonDetail() {
     }
   };
 
-  const backTo = `/${category}` as "/numbers" | "/days" | "/months" | "/verbs";
+  const backTo = `/${category}` as "/numbers" | "/days" | "/months" | "/verbs" | "/animals" | "/furniture" | "/objects";
 
   return (
     <div className="space-y-5 pb-2">

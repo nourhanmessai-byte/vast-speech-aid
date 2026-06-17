@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
-import { Type, Music2, BookA, MessageSquare, MessagesSquare, Apple, Carrot, Hash, CalendarDays, Calendar, Activity, ChevronRight, Shapes } from "lucide-react";
+import { Type, Music2, BookA, MessageSquare, MessagesSquare, Apple, Carrot, Hash, CalendarDays, Calendar, Activity, ChevronRight, Shapes, PawPrint, Armchair, Package } from "lucide-react";
 
 export const Route = createFileRoute("/exercises")({
   component: Exercises,
@@ -16,6 +16,9 @@ function Exercises() {
     { key: "days", to: "/days" as const, icon: CalendarDays, color: "from-sky-400 to-violet-400", title: t("days"), desc: t("daysDesc") },
     { key: "months", to: "/months" as const, icon: Calendar, color: "from-pink-400 to-violet-400", title: t("months"), desc: t("monthsDesc") },
     { key: "verbs", to: "/verbs" as const, icon: Activity, color: "from-emerald-400 to-violet-400", title: t("verbs"), desc: t("verbsDesc") },
+    { key: "animals", to: "/animals" as const, icon: PawPrint, color: "from-amber-400 to-rose-400", title: t("animals"), desc: t("animalsDesc") },
+    { key: "furniture", to: "/furniture" as const, icon: Armchair, color: "from-stone-400 to-amber-400", title: t("furniture"), desc: t("furnitureDesc") },
+    { key: "objects", to: "/objects" as const, icon: Package, color: "from-sky-400 to-violet-400", title: t("objects"), desc: t("objectsDesc") },
     { key: "letters", to: "/videos" as const, icon: Type, color: "from-violet-400 to-indigo-400", title: t("letters"), desc: t("letterDesc") },
     { key: "syllables", to: "/videos" as const, icon: Music2, color: "from-fuchsia-400 to-violet-400", title: t("syllables"), desc: t("syllableDesc") },
     { key: "words", to: "/videos" as const, icon: BookA, color: "from-indigo-400 to-sky-400", title: t("words"), desc: t("wordDesc") },
