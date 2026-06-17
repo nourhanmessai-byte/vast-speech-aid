@@ -14,14 +14,17 @@ import { Route as VerbsRouteImport } from './routes/verbs'
 import { Route as TherapistRouteImport } from './routes/therapist'
 import { Route as RecordRouteImport } from './routes/record'
 import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as ObjectsRouteImport } from './routes/objects'
 import { Route as NumbersRouteImport } from './routes/numbers'
 import { Route as MonthsRouteImport } from './routes/months'
 import { Route as LegumesRouteImport } from './routes/legumes'
+import { Route as FurnitureRouteImport } from './routes/furniture'
 import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as ExercisesRouteImport } from './routes/exercises'
 import { Route as DaysRouteImport } from './routes/days'
 import { Route as ClassifyRouteImport } from './routes/classify'
+import { Route as AnimalsRouteImport } from './routes/animals'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FoodsIdRouteImport } from './routes/foods.$id'
 import { Route as LessonCategoryIdRouteImport } from './routes/lesson.$category.$id'
@@ -51,6 +54,11 @@ const ProgressRoute = ProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObjectsRoute = ObjectsRouteImport.update({
+  id: '/objects',
+  path: '/objects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NumbersRoute = NumbersRouteImport.update({
   id: '/numbers',
   path: '/numbers',
@@ -64,6 +72,11 @@ const MonthsRoute = MonthsRouteImport.update({
 const LegumesRoute = LegumesRouteImport.update({
   id: '/legumes',
   path: '/legumes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FurnitureRoute = FurnitureRouteImport.update({
+  id: '/furniture',
+  path: '/furniture',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FruitsRoute = FruitsRouteImport.update({
@@ -91,6 +104,11 @@ const ClassifyRoute = ClassifyRouteImport.update({
   path: '/classify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnimalsRoute = AnimalsRouteImport.update({
+  id: '/animals',
+  path: '/animals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -109,14 +127,17 @@ const LessonCategoryIdRoute = LessonCategoryIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/animals': typeof AnimalsRoute
   '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
   '/fruits': typeof FruitsRoute
+  '/furniture': typeof FurnitureRoute
   '/legumes': typeof LegumesRoute
   '/months': typeof MonthsRoute
   '/numbers': typeof NumbersRoute
+  '/objects': typeof ObjectsRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
@@ -127,14 +148,17 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/animals': typeof AnimalsRoute
   '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
   '/fruits': typeof FruitsRoute
+  '/furniture': typeof FurnitureRoute
   '/legumes': typeof LegumesRoute
   '/months': typeof MonthsRoute
   '/numbers': typeof NumbersRoute
+  '/objects': typeof ObjectsRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
@@ -146,14 +170,17 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/animals': typeof AnimalsRoute
   '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
   '/fruits': typeof FruitsRoute
+  '/furniture': typeof FurnitureRoute
   '/legumes': typeof LegumesRoute
   '/months': typeof MonthsRoute
   '/numbers': typeof NumbersRoute
+  '/objects': typeof ObjectsRoute
   '/progress': typeof ProgressRoute
   '/record': typeof RecordRoute
   '/therapist': typeof TherapistRoute
@@ -166,14 +193,17 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/animals'
     | '/classify'
     | '/days'
     | '/exercises'
     | '/foods'
     | '/fruits'
+    | '/furniture'
     | '/legumes'
     | '/months'
     | '/numbers'
+    | '/objects'
     | '/progress'
     | '/record'
     | '/therapist'
@@ -184,14 +214,17 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/animals'
     | '/classify'
     | '/days'
     | '/exercises'
     | '/foods'
     | '/fruits'
+    | '/furniture'
     | '/legumes'
     | '/months'
     | '/numbers'
+    | '/objects'
     | '/progress'
     | '/record'
     | '/therapist'
@@ -202,14 +235,17 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/animals'
     | '/classify'
     | '/days'
     | '/exercises'
     | '/foods'
     | '/fruits'
+    | '/furniture'
     | '/legumes'
     | '/months'
     | '/numbers'
+    | '/objects'
     | '/progress'
     | '/record'
     | '/therapist'
@@ -221,14 +257,17 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnimalsRoute: typeof AnimalsRoute
   ClassifyRoute: typeof ClassifyRoute
   DaysRoute: typeof DaysRoute
   ExercisesRoute: typeof ExercisesRoute
   FoodsRoute: typeof FoodsRouteWithChildren
   FruitsRoute: typeof FruitsRoute
+  FurnitureRoute: typeof FurnitureRoute
   LegumesRoute: typeof LegumesRoute
   MonthsRoute: typeof MonthsRoute
   NumbersRoute: typeof NumbersRoute
+  ObjectsRoute: typeof ObjectsRoute
   ProgressRoute: typeof ProgressRoute
   RecordRoute: typeof RecordRoute
   TherapistRoute: typeof TherapistRoute
@@ -274,6 +313,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/objects': {
+      id: '/objects'
+      path: '/objects'
+      fullPath: '/objects'
+      preLoaderRoute: typeof ObjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/numbers': {
       id: '/numbers'
       path: '/numbers'
@@ -293,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/legumes'
       fullPath: '/legumes'
       preLoaderRoute: typeof LegumesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/furniture': {
+      id: '/furniture'
+      path: '/furniture'
+      fullPath: '/furniture'
+      preLoaderRoute: typeof FurnitureRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fruits': {
@@ -328,6 +381,13 @@ declare module '@tanstack/react-router' {
       path: '/classify'
       fullPath: '/classify'
       preLoaderRoute: typeof ClassifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/animals': {
+      id: '/animals'
+      path: '/animals'
+      fullPath: '/animals'
+      preLoaderRoute: typeof AnimalsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -366,14 +426,17 @@ const FoodsRouteWithChildren = FoodsRoute._addFileChildren(FoodsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnimalsRoute: AnimalsRoute,
   ClassifyRoute: ClassifyRoute,
   DaysRoute: DaysRoute,
   ExercisesRoute: ExercisesRoute,
   FoodsRoute: FoodsRouteWithChildren,
   FruitsRoute: FruitsRoute,
+  FurnitureRoute: FurnitureRoute,
   LegumesRoute: LegumesRoute,
   MonthsRoute: MonthsRoute,
   NumbersRoute: NumbersRoute,
+  ObjectsRoute: ObjectsRoute,
   ProgressRoute: ProgressRoute,
   RecordRoute: RecordRoute,
   TherapistRoute: TherapistRoute,
