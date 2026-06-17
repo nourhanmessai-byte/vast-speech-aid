@@ -44,16 +44,6 @@ export interface LessonItem {
   tint: string;
 }
 
-  fr: string;
-  ar: string;
-  ipa: string;
-  /** Big emoji or symbol shown when no image */
-  symbol?: string;
-  /** Optional illustration */
-  image?: string;
-  /** Tailwind gradient classes for the hero tint */
-  tint: string;
-}
 
 export const NUMBERS: LessonItem[] = [
   { id: "1", fr: "Un", ar: "واحد", ipa: "/œ̃/", symbol: "1", tint: "from-violet-100 to-indigo-50" },
