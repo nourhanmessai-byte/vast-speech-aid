@@ -104,7 +104,7 @@ function CategoryCard({
   title,
   desc,
 }: {
-  to: "/fruits" | "/legumes" | "/numbers" | "/days" | "/months" | "/verbs" | "/classify";
+  to: "/fruits" | "/legumes" | "/numbers" | "/days" | "/months" | "/verbs" | "/classify" | "/animals" | "/furniture" | "/objects";
   emoji: string;
   tint: string;
   title: string;
