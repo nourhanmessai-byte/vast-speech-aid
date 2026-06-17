@@ -21,6 +21,7 @@ import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as ExercisesRouteImport } from './routes/exercises'
 import { Route as DaysRouteImport } from './routes/days'
+import { Route as ClassifyRouteImport } from './routes/classify'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FoodsIdRouteImport } from './routes/foods.$id'
 import { Route as LessonCategoryIdRouteImport } from './routes/lesson.$category.$id'
@@ -85,6 +86,11 @@ const DaysRoute = DaysRouteImport.update({
   path: '/days',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClassifyRoute = ClassifyRouteImport.update({
+  id: '/classify',
+  path: '/classify',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -103,6 +109,7 @@ const LessonCategoryIdRoute = LessonCategoryIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
@@ -120,6 +127,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
@@ -138,6 +146,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
   '/foods': typeof FoodsRouteWithChildren
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/classify'
     | '/days'
     | '/exercises'
     | '/foods'
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/classify'
     | '/days'
     | '/exercises'
     | '/foods'
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/classify'
     | '/days'
     | '/exercises'
     | '/foods'
@@ -209,6 +221,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClassifyRoute: typeof ClassifyRoute
   DaysRoute: typeof DaysRoute
   ExercisesRoute: typeof ExercisesRoute
   FoodsRoute: typeof FoodsRouteWithChildren
@@ -310,6 +323,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DaysRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/classify': {
+      id: '/classify'
+      path: '/classify'
+      fullPath: '/classify'
+      preLoaderRoute: typeof ClassifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -346,6 +366,7 @@ const FoodsRouteWithChildren = FoodsRoute._addFileChildren(FoodsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClassifyRoute: ClassifyRoute,
   DaysRoute: DaysRoute,
   ExercisesRoute: ExercisesRoute,
   FoodsRoute: FoodsRouteWithChildren,
