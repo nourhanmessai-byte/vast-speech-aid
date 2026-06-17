@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
-import { Type, Music2, BookA, MessageSquare, MessagesSquare, Apple, Carrot, Hash, CalendarDays, Calendar, Activity, ChevronRight } from "lucide-react";
+import { Type, Music2, BookA, MessageSquare, MessagesSquare, Apple, Carrot, Hash, CalendarDays, Calendar, Activity, ChevronRight, Shapes } from "lucide-react";
 
 export const Route = createFileRoute("/exercises")({
   component: Exercises,
@@ -11,6 +11,7 @@ function Exercises() {
   const items = [
     { key: "fruits", to: "/fruits" as const, icon: Apple, color: "from-rose-400 to-amber-400", title: t("fruits"), desc: t("fruitsDesc") },
     { key: "vegetables", to: "/legumes" as const, icon: Carrot, color: "from-emerald-400 to-lime-400", title: t("vegetables"), desc: t("vegetablesDesc") },
+    { key: "classify", to: "/classify" as const, icon: Shapes, color: "from-violet-500 to-fuchsia-400", title: t("classify"), desc: t("classifyDesc") },
     { key: "numbers", to: "/numbers" as const, icon: Hash, color: "from-violet-400 to-indigo-400", title: t("numbers"), desc: t("numbersDesc") },
     { key: "days", to: "/days" as const, icon: CalendarDays, color: "from-sky-400 to-violet-400", title: t("days"), desc: t("daysDesc") },
     { key: "months", to: "/months" as const, icon: Calendar, color: "from-pink-400 to-violet-400", title: t("months"), desc: t("monthsDesc") },

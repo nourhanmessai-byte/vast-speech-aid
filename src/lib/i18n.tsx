@@ -71,6 +71,9 @@ const dict = {
   monthsDesc: { fr: "Nommer les douze mois", ar: "تسمية الأشهر الإثني عشر" },
   verbs: { fr: "Verbes d'action", ar: "أفعال الحركة" },
   verbsDesc: { fr: "Verbes courants (test MTA)", ar: "أفعال شائعة (اختبار MTA)" },
+  classify: { fr: "Classification", ar: "التصنيف" },
+  classifyDesc: { fr: "Classer les objets : fruits, légumes, vêtements", ar: "صنّف الأشياء: فواكه، خضر، ملابس" },
+  clothing: { fr: "Vêtements", ar: "الملابس" },
 };
 
 type Key = keyof typeof dict;
