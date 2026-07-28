@@ -3,6 +3,7 @@ import { useI18n } from "@/lib/i18n";
 import { LESSONS, getLesson, isLessonCategory, type LessonCategory } from "@/lib/lessons";
 import { ArrowLeft, ArrowRight, RotateCcw, Volume2, Mic, Square, Gauge } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { MouthPlayer } from "@/components/MouthPlayer";
 
 export const Route = createFileRoute("/lesson/$category/$id")({
   component: LessonDetail,
@@ -161,7 +162,7 @@ function LessonDetail() {
         <div className="text-[11px] font-bold tracking-wider uppercase opacity-90 mb-3 text-center">
           {t("watchMouth")}
         </div>
-        <AnimatedMouth speaking={speaking} slow={slow} />
+        <MouthPlayer id={item.id} speaking={speaking} slow={slow} />
         <div className="mt-4 grid grid-cols-2 gap-2">
           <button
             onClick={speak}
@@ -223,40 +224,6 @@ function LessonDetail() {
         {t("next")} · {lang === "ar" ? nextItem.ar : nextItem.fr}
         <Arrow className="h-4 w-4" />
       </Link>
-    </div>
-  );
-}
-
-function AnimatedMouth({ speaking, slow }: { speaking: boolean; slow: boolean }) {
-  const dur = slow ? "0.85s" : "0.42s";
-  return (
-    <div className="mx-auto h-44 w-44 rounded-full bg-white/15 backdrop-blur flex items-center justify-center relative">
-      <div className={`absolute inset-0 rounded-full ${speaking ? "animate-pulse-ring" : ""}`} />
-      <svg viewBox="0 0 200 200" className="w-36 h-36" aria-hidden>
-        <ellipse cx="100" cy="100" rx="80" ry="80" fill="#FFE3D0" />
-        <circle cx="72" cy="78" r="5" fill="#3a2a4a" />
-        <circle cx="128" cy="78" r="5" fill="#3a2a4a" />
-        <ellipse
-          cx="100"
-          cy={speaking ? 130 : 128}
-          rx={speaking ? 28 : 26}
-          ry={speaking ? 22 : 6}
-          fill="#B5354B"
-          style={{
-            transition: "all 220ms ease-in-out",
-            animation: speaking ? `mouth-talk ${dur} ease-in-out infinite` : undefined,
-            transformOrigin: "100px 130px",
-          }}
-        />
-        {speaking && <rect x="82" y={118} width="36" height="5" rx="2" fill="white" />}
-        {speaking && <ellipse cx="100" cy="140" rx="14" ry="6" fill="#E96A82" />}
-      </svg>
-      <style>{`
-        @keyframes mouth-talk {
-          0%, 100% { transform: scaleY(0.45); }
-          50% { transform: scaleY(1); }
-        }
-      `}</style>
     </div>
   );
 }
