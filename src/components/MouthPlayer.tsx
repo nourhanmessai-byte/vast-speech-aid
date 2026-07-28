@@ -1,11 +1,21 @@
 import { useEffect, useRef, useState } from "react";
+import mouth1 from "@/assets/mouth/mouth-1.mp4.asset.json";
+import mouth2 from "@/assets/mouth/mouth-2.mp4.asset.json";
+import mouth3 from "@/assets/mouth/mouth-3.mp4.asset.json";
+
+/** Vidéos d'articulation par défaut (gros plan sur la bouche). */
+const DEFAULT_MOUTH_VIDEOS = [mouth1.url, mouth2.url, mouth3.url];
+
+function pickDefault(id: string) {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+  return DEFAULT_MOUTH_VIDEOS[h % DEFAULT_MOUTH_VIDEOS.length];
+}
 
 /**
- * Affiche la vidéo d'articulation (mouvement de la bouche) si elle existe,
- * sinon repli automatique sur la bouche animée en SVG.
- *
- * Convention : déposez le fichier dans  public/mouth-videos/<id>.mp4
- * Exemple : public/mouth-videos/apple.mp4  → utilisé pour l'exercice "apple".
+ * Affiche la vidéo d'articulation (mouvement de la bouche).
+ * Une vidéo spécifique peut être déposée dans public/mouth-videos/<id>.mp4 ;
+ * sinon une vidéo d'articulation par défaut est utilisée.
  */
 export function MouthPlayer({
   id,
@@ -16,17 +26,18 @@ export function MouthPlayer({
   speaking: boolean;
   slow: boolean;
 }) {
-  const [hasVideo, setHasVideo] = useState(true);
+  const [src, setSrc] = useState(`/mouth-videos/${id}.mp4`);
+  const [failed, setFailed] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const src = `/mouth-videos/${id}.mp4`;
 
   useEffect(() => {
-    setHasVideo(true);
+    setSrc(`/mouth-videos/${id}.mp4`);
+    setFailed(false);
   }, [id]);
 
   useEffect(() => {
     const v = videoRef.current;
-    if (!v || !hasVideo) return;
+    if (!v || failed) return;
     v.playbackRate = slow ? 0.5 : 1;
     if (speaking) {
       v.currentTime = 0;
@@ -35,21 +46,35 @@ export function MouthPlayer({
       v.pause();
       v.currentTime = 0;
     }
-  }, [speaking, slow, hasVideo]);
+  }, [speaking, slow, src, failed]);
 
-  if (!hasVideo) return <AnimatedMouth speaking={speaking} slow={slow} />;
+  const onError = () => {
+    const fallback = pickDefault(id);
+    if (src !== fallback) {
+      setSrc(fallback);
+    } else {
+      setFailed(true);
+    }
+  };
+
+  if (failed) return <AnimatedMouth speaking={speaking} slow={slow} />;
 
   return (
     <div className="mx-auto h-44 w-44 rounded-full overflow-hidden bg-white/15 backdrop-blur relative">
-      <div className={`absolute inset-0 rounded-full ${speaking ? "animate-pulse-ring" : ""}`} />
+      <div
+        className={`absolute inset-0 rounded-full pointer-events-none z-10 ${
+          speaking ? "animate-pulse-ring" : ""
+        }`}
+      />
       <video
         ref={videoRef}
+        key={src}
         src={src}
         muted
         playsInline
         loop
-        preload="metadata"
-        onError={() => setHasVideo(false)}
+        preload="auto"
+        onError={onError}
         className="w-full h-full object-cover"
       />
     </div>
