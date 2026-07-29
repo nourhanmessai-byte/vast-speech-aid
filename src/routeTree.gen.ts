@@ -29,6 +29,7 @@ import { Route as AnimalsRouteImport } from './routes/animals'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FoodsIdRouteImport } from './routes/foods.$id'
 import { Route as LessonCategoryIdRouteImport } from './routes/lesson.$category.$id'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
@@ -130,6 +131,11 @@ const LessonCategoryIdRoute = LessonCategoryIdRouteImport.update({
   path: '/lesson/$category/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -151,6 +157,7 @@ export interface FileRoutesByFullPath {
   '/verbs': typeof VerbsRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRoutesByTo {
@@ -173,6 +180,7 @@ export interface FileRoutesByTo {
   '/verbs': typeof VerbsRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRoutesById {
@@ -196,6 +204,7 @@ export interface FileRoutesById {
   '/verbs': typeof VerbsRoute
   '/videos': typeof VideosRoute
   '/foods/$id': typeof FoodsIdRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/lesson/$category/$id': typeof LessonCategoryIdRoute
 }
 export interface FileRouteTypes {
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/verbs'
     | '/videos'
     | '/foods/$id'
+    | '/.lovable/oauth/consent'
     | '/lesson/$category/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/verbs'
     | '/videos'
     | '/foods/$id'
+    | '/.lovable/oauth/consent'
     | '/lesson/$category/$id'
   id:
     | '__root__'
@@ -264,6 +275,7 @@ export interface FileRouteTypes {
     | '/verbs'
     | '/videos'
     | '/foods/$id'
+    | '/.lovable/oauth/consent'
     | '/lesson/$category/$id'
   fileRoutesById: FileRoutesById
 }
@@ -286,6 +298,7 @@ export interface RootRouteChildren {
   TherapistRoute: typeof TherapistRoute
   VerbsRoute: typeof VerbsRoute
   VideosRoute: typeof VideosRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   LessonCategoryIdRoute: typeof LessonCategoryIdRoute
 }
 
@@ -431,6 +444,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LessonCategoryIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -463,6 +483,7 @@ const rootRouteChildren: RootRouteChildren = {
   TherapistRoute: TherapistRoute,
   VerbsRoute: VerbsRoute,
   VideosRoute: VideosRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   LessonCategoryIdRoute: LessonCategoryIdRoute,
 }
 export const routeTree = rootRouteImport
