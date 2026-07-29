@@ -95,11 +95,11 @@ function AuthPage() {
   const google = async () => {
     setBusy(true);
     setMsg(null);
-    const result = await lovable.auth.signInWithOAuth("google", {
+    const result = (await lovable.auth.signInWithOAuth("google", {
       redirect_uri: window.location.origin + next,
-    });
+    })) as { error?: { message?: string } | Error; redirected?: boolean };
     if (result.error) {
-      setMsg(result.error.message ?? String(result.error));
+      setMsg(result.error.message ?? "OAuth error");
       setBusy(false);
       return;
     }
