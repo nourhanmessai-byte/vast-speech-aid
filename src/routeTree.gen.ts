@@ -24,6 +24,7 @@ import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as ExercisesRouteImport } from './routes/exercises'
 import { Route as DaysRouteImport } from './routes/days'
 import { Route as ClassifyRouteImport } from './routes/classify'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AnimalsRouteImport } from './routes/animals'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FoodsIdRouteImport } from './routes/foods.$id'
@@ -104,6 +105,11 @@ const ClassifyRoute = ClassifyRouteImport.update({
   path: '/classify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AnimalsRoute = AnimalsRouteImport.update({
   id: '/animals',
   path: '/animals',
@@ -128,6 +134,7 @@ const LessonCategoryIdRoute = LessonCategoryIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/animals': typeof AnimalsRoute
+  '/auth': typeof AuthRoute
   '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/animals': typeof AnimalsRoute
+  '/auth': typeof AuthRoute
   '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/animals': typeof AnimalsRoute
+  '/auth': typeof AuthRoute
   '/classify': typeof ClassifyRoute
   '/days': typeof DaysRoute
   '/exercises': typeof ExercisesRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/animals'
+    | '/auth'
     | '/classify'
     | '/days'
     | '/exercises'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/animals'
+    | '/auth'
     | '/classify'
     | '/days'
     | '/exercises'
@@ -236,6 +247,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/animals'
+    | '/auth'
     | '/classify'
     | '/days'
     | '/exercises'
@@ -258,6 +270,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnimalsRoute: typeof AnimalsRoute
+  AuthRoute: typeof AuthRoute
   ClassifyRoute: typeof ClassifyRoute
   DaysRoute: typeof DaysRoute
   ExercisesRoute: typeof ExercisesRoute
@@ -383,6 +396,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClassifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/animals': {
       id: '/animals'
       path: '/animals'
@@ -427,6 +447,7 @@ const FoodsRouteWithChildren = FoodsRoute._addFileChildren(FoodsRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnimalsRoute: AnimalsRoute,
+  AuthRoute: AuthRoute,
   ClassifyRoute: ClassifyRoute,
   DaysRoute: DaysRoute,
   ExercisesRoute: ExercisesRoute,
