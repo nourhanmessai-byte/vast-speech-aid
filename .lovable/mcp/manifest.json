@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "sdk_version": "0.25.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://hvawvkwuoglhcmdvmsam.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "vast-speech-therapy",
+      "version": "0.1.0",
+      "title": "VAST Speech Therapy"
+    },
+    "tools": [
+      {
+        "name": "list_exercise_categories",
+        "title": "List exercise categories",
+        "description": "List every VAST Speech therapy category (fruits, vegetables, numbers, days, months, verbs, animals, furniture, objects) with how many items each contains.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_exercise_items",
+        "title": "List exercise items",
+        "description": "List the practice items in one VAST Speech category, with the Arabic word, French word and phonetic transcription for each.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Category id, e.g. fruits, legumes, numbers, days, months, verbs, animals, furniture, objects."
+            }
+          },
+          "required": [
+            "category"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "log_practice_session",
+        "title": "Log a practice session",
+        "description": "Record that the signed-in patient practiced one item, with an optional self-rated score from 0 to 100 and notes.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Category id, e.g. fruits, verbs, numbers."
+            },
+            "item_id": {
+              "type": "string",
+              "description": "Item id inside that category, e.g. apple, eat, one."
+            },
+            "language": {
+              "type": "string",
+              "description": "Language practiced: ar or fr."
+            },
+            "score": {
+              "type": "number",
+              "description": "Self-rated pronunciation score from 0 to 100."
+            },
+            "notes": {
+              "type": "string",
+              "description": "Free-text notes about the session."
+            }
+          },
+          "required": [
+            "category",
+            "item_id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_practice_sessions",
+        "title": "List practice history",
+        "description": "Read the signed-in patient's recorded practice sessions, most recent first, optionally filtered by category.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Optional category id filter."
+            },
+            "limit": {
+              "type": "number",
+              "description": "How many sessions to return (default 20, max 100)."
+            }
+          }
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
