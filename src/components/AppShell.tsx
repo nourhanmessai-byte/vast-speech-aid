@@ -1,10 +1,21 @@
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
-import { Home, BookOpen, Video, Mic, BarChart3, Stethoscope, Languages } from "lucide-react";
+import { Home, BookOpen, Video, Mic, BarChart3, Stethoscope, Languages, LogIn, LogOut } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { supabase } from "@/integrations/supabase/client";
 
 export function AppShell() {
   const { t, lang, setLang } = useI18n();
   const { pathname } = useLocation();
+  const [email, setEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setEmail(session?.user?.email ?? null);
+    });
+    supabase.auth.getSession().then(({ data }) => setEmail(data.session?.user?.email ?? null));
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   const tabs = [
     { to: "/", icon: Home, label: t("home") },
@@ -14,6 +25,11 @@ export function AppShell() {
     { to: "/progress", icon: BarChart3, label: t("progress") },
     { to: "/therapist", icon: Stethoscope, label: t("therapist") },
   ];
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    setEmail(null);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-soft">
@@ -27,13 +43,34 @@ export function AppShell() {
               <div className="font-bold text-sm">{t("appName")}</div>
             </div>
           </Link>
-          <button
-            onClick={() => setLang(lang === "fr" ? "ar" : "fr")}
-            className="flex items-center gap-1.5 rounded-full bg-card shadow-card px-3 py-1.5 text-xs font-semibold text-foreground/80 hover:text-brand transition"
-          >
-            <Languages className="h-3.5 w-3.5" />
-            {lang === "fr" ? "العربية" : "Français"}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setLang(lang === "fr" ? "ar" : "fr")}
+              className="flex items-center gap-1.5 rounded-full bg-card shadow-card px-3 py-1.5 text-xs font-semibold text-foreground/80 hover:text-brand transition"
+            >
+              <Languages className="h-3.5 w-3.5" />
+              {lang === "fr" ? "العربية" : "Français"}
+            </button>
+            {email ? (
+              <button
+                onClick={signOut}
+                title={email}
+                className="flex items-center gap-1.5 rounded-full bg-card shadow-card px-3 py-1.5 text-xs font-semibold text-foreground/80 hover:text-brand transition"
+              >
+                <LogOut className="h-3.5 w-3.5" />
+                {lang === "ar" ? "خروج" : "Sortir"}
+              </button>
+            ) : (
+              <Link
+                to="/auth"
+                search={{ next: "/" }}
+                className="flex items-center gap-1.5 rounded-full bg-gradient-brand text-brand-foreground shadow-soft px-3 py-1.5 text-xs font-semibold"
+              >
+                <LogIn className="h-3.5 w-3.5" />
+                {lang === "ar" ? "دخول" : "Connexion"}
+              </Link>
+            )}
+          </div>
         </div>
       </header>
 
