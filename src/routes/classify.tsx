@@ -81,7 +81,7 @@ function Classify() {
   const categories: { key: Category; emoji: string; ar: string; fr: string; color: string }[] = [
     { key: "fruit", emoji: "🍎", ar: "الفواكه", fr: "Fruits", color: "from-rose-400 to-amber-400" },
     { key: "vegetable", emoji: "🥕", ar: "الخضر", fr: "Légumes", color: "from-emerald-400 to-lime-400" },
-    { key: "clothing", emoji: "👕", ar: "الملابس", fr: "Vêtements", color: "from-sky-400 to-violet-400" },
+    { key: "clothing", emoji: "👕", ar: "الملابس", fr: "Vêtements", color: "from-green-400 to-emerald-400" },
   ];
 
   const total = deck.length;
@@ -92,7 +92,7 @@ function Classify() {
     <div className="space-y-5">
       <header>
         <h1 className="text-2xl font-extrabold flex items-center gap-2">
-          <span className="h-9 w-9 rounded-2xl bg-gradient-brand text-white flex items-center justify-center shadow-soft">
+          <span className="h-9 w-9 rounded-2xl bg-gradient-brand text-primary-foreground flex items-center justify-center shadow-soft">
             <Sparkles className="h-5 w-5" />
           </span>
           {t("classify")}
@@ -119,7 +119,7 @@ function Classify() {
           </div>
           <button
             onClick={reset}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-brand text-white font-bold px-5 py-3 shadow-soft"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-brand text-primary-foreground font-bold px-5 py-3 shadow-soft"
           >
             <RotateCcw className="h-4 w-4" /> {t("replay")}
           </button>
@@ -147,7 +147,7 @@ function Classify() {
               </div>
               <button
                 onClick={() => speak(lang === "ar" ? current!.ar : current!.fr)}
-                className="h-11 w-11 rounded-full bg-gradient-brand text-white flex items-center justify-center shadow-soft"
+                className="h-11 w-11 rounded-full bg-gradient-brand text-primary-foreground flex items-center justify-center shadow-soft"
                 aria-label={t("listen")}
               >
                 <Volume2 className="h-5 w-5" />
@@ -156,7 +156,7 @@ function Classify() {
             {feedback && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/10">
                 <div
-                  className={`h-20 w-20 rounded-full flex items-center justify-center text-white text-4xl shadow-soft ${
+                  className={`h-20 w-20 rounded-full flex items-center justify-center text-primary-foreground text-4xl shadow-soft ${
                     feedback === "correct" ? "bg-emerald-500" : "bg-rose-500"
                   }`}
                 >
@@ -172,7 +172,7 @@ function Classify() {
                 key={c.key}
                 onClick={() => choose(c.key)}
                 disabled={!!feedback}
-                className={`rounded-2xl p-4 bg-gradient-to-br ${c.color} text-white shadow-soft active:scale-95 transition disabled:opacity-60`}
+                className={`rounded-2xl p-4 bg-gradient-to-br ${c.color} text-primary-foreground shadow-soft active:scale-95 transition disabled:opacity-60`}
               >
                 <div className="text-3xl">{c.emoji}</div>
                 <div className="mt-2 text-sm font-extrabold leading-tight">

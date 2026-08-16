@@ -39,7 +39,7 @@ function Record() {
       <div className="flex flex-col items-center gap-4 py-4">
         <button
           onClick={toggle}
-          className={`relative h-28 w-28 rounded-full flex items-center justify-center text-white shadow-soft transition-all ${
+          className={`relative h-28 w-28 rounded-full flex items-center justify-center text-primary-foreground shadow-soft transition-all ${
             recording ? "bg-destructive scale-110 animate-pulse-ring" : "bg-gradient-brand hover:scale-105"
           }`}
           aria-label={recording ? t("stopRec") : t("startRec")}

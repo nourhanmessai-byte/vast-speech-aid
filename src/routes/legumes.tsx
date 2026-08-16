@@ -15,7 +15,7 @@ function LegumesPage() {
     <div className="space-y-5">
       <header>
         <h1 className="text-2xl font-extrabold leading-tight flex items-center gap-2">
-          <span className="h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-300 to-lime-300 text-white flex items-center justify-center shadow-soft">
+          <span className="h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-300 to-lime-300 text-primary-foreground flex items-center justify-center shadow-soft">
             <Carrot className="h-5 w-5" />
           </span>
           {t("vegetables")}

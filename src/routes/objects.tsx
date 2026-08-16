@@ -17,7 +17,7 @@ function ObjectsPage() {
       title={t("objects")}
       description={t("objectsDesc")}
       icon={Package}
-      iconTint="from-sky-300 to-violet-300"
+      iconTint="from-teal-300 to-emerald-300"
     />
   );
 }
