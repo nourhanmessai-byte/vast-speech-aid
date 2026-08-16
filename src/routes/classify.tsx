@@ -81,7 +81,7 @@ function Classify() {
   const categories: { key: Category; emoji: string; ar: string; fr: string; color: string }[] = [
     { key: "fruit", emoji: "🍎", ar: "الفواكه", fr: "Fruits", color: "from-rose-400 to-amber-400" },
     { key: "vegetable", emoji: "🥕", ar: "الخضر", fr: "Légumes", color: "from-emerald-400 to-lime-400" },
-    { key: "clothing", emoji: "👕", ar: "الملابس", fr: "Vêtements", color: "from-sky-400 to-violet-400" },
+    { key: "clothing", emoji: "👕", ar: "الملابس", fr: "Vêtements", color: "from-green-400 to-emerald-400" },
   ];
 
   const total = deck.length;
