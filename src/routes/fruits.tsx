@@ -1,15 +1,38 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
 import { FRUITS } from "@/lib/foods";
+import { MouthPlayer } from "@/components/MouthPlayer";
 import { Apple, Carrot, ChevronRight, ArrowRight, ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/fruits")({
   component: FruitsPage,
 });
 
+function speakFood(food: (typeof FRUITS)[number]) {
+  if (typeof window === "undefined" || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const rate = 0.8;
+  const ar = new SpeechSynthesisUtterance(food.ar);
+  ar.lang = "ar-SA";
+  ar.rate = rate;
+  const fr = new SpeechSynthesisUtterance(food.fr);
+  fr.lang = "fr-FR";
+  fr.rate = rate;
+  window.speechSynthesis.speak(ar);
+  window.speechSynthesis.speak(fr);
+}
+
+function stopSpeech() {
+  if (typeof window !== "undefined") window.speechSynthesis?.cancel();
+}
+
 function FruitsPage() {
   const { t, lang } = useI18n();
   const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
+  const [pressedId, setPressedId] = useState<string | null>(null);
+
+  useEffect(() => () => stopSpeech(), []);
 
   return (
     <div className="space-y-5">
@@ -39,36 +62,61 @@ function FruitsPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        {FRUITS.map((f) => (
-          <Link
-            key={f.id}
-            to="/foods/$id"
-            params={{ id: f.id }}
-            className="group relative overflow-hidden rounded-3xl bg-card shadow-card hover:shadow-soft transition-all hover:-translate-y-0.5"
-          >
-            <div className={`aspect-square bg-gradient-to-br ${f.tint} flex items-center justify-center p-3`}>
-              <img
-                src={f.image}
-                alt={f.fr}
-                width={512}
-                height={512}
-                loading="lazy"
-                className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="p-3 flex items-center justify-between gap-2">
-              <div className="min-w-0">
-                <div className="font-extrabold text-sm truncate">
-                  {lang === "ar" ? f.ar : f.fr}
-                </div>
-                <div className="text-[11px] text-muted-foreground truncate">
-                  {lang === "ar" ? f.fr : f.ar}
-                </div>
+        {FRUITS.map((f) => {
+          const isPressed = pressedId === f.id;
+          return (
+            <Link
+              key={f.id}
+              to="/foods/$id"
+              params={{ id: f.id }}
+              className="group relative overflow-hidden rounded-3xl bg-card shadow-card hover:shadow-soft transition-all hover:-translate-y-0.5"
+              onPointerDown={() => {
+                setPressedId(f.id);
+                speakFood(f);
+              }}
+              onPointerUp={() => {
+                setPressedId(null);
+                stopSpeech();
+              }}
+              onPointerLeave={() => {
+                setPressedId(null);
+                stopSpeech();
+              }}
+            >
+              <div className={`aspect-square bg-gradient-to-br ${f.tint} flex items-center justify-center p-3 relative`}>
+                <img
+                  src={f.image}
+                  alt={f.fr}
+                  width={512}
+                  height={512}
+                  loading="lazy"
+                  className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                />
+                {isPressed && (
+                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-white/40 backdrop-blur-sm pointer-events-none animate-in fade-in zoom-in duration-200">
+                    <div className="h-28 w-28 rounded-full overflow-hidden shadow-soft bg-white/80">
+                      <MouthPlayer id={f.id} speaking={true} slow={false} />
+                    </div>
+                    <span className="text-[10px] font-bold text-foreground/80 bg-white/70 px-2 py-1 rounded-full">
+                      {lang === "ar" ? "حركة الفم" : "Mouvement de la bouche"}
+                    </span>
+                  </div>
+                )}
               </div>
-              <ChevronRight className="h-4 w-4 text-brand rtl:rotate-180 shrink-0" />
-            </div>
-          </Link>
-        ))}
+              <div className="p-3 flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="font-extrabold text-sm truncate">
+                    {lang === "ar" ? f.ar : f.fr}
+                  </div>
+                  <div className="text-[11px] text-muted-foreground truncate">
+                    {lang === "ar" ? f.fr : f.ar}
+                  </div>
+                </div>
+                <ChevronRight className="h-4 w-4 text-brand rtl:rotate-180 shrink-0" />
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
