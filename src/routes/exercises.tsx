@@ -35,7 +35,7 @@ function Exercises() {
             to={to}
             className="group flex items-center gap-4 rounded-2xl bg-card shadow-card p-4 hover:shadow-soft transition"
           >
-            <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center text-white shadow-soft`}>
+            <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center text-primary-foreground shadow-soft`}>
               <Icon className="h-6 w-6" strokeWidth={2.4} />
             </div>
             <div className="flex-1 min-w-0">
