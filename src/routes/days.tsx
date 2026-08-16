@@ -17,7 +17,7 @@ function DaysPage() {
       title={t("days")}
       description={t("daysDesc")}
       icon={CalendarDays}
-      iconTint="from-sky-300 to-violet-300"
+      iconTint="from-emerald-300 to-green-300"
     />
   );
 }

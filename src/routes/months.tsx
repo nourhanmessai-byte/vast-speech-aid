@@ -17,7 +17,7 @@ function MonthsPage() {
       title={t("months")}
       description={t("monthsDesc")}
       icon={Calendar}
-      iconTint="from-pink-300 to-violet-300"
+      iconTint="from-teal-300 to-emerald-300"
     />
   );
 }

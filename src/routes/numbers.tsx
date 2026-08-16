@@ -17,7 +17,7 @@ function NumbersPage() {
       title={t("numbers")}
       description={t("numbersDesc")}
       icon={Hash}
-      iconTint="from-violet-300 to-indigo-300"
+      iconTint="from-emerald-300 to-teal-300"
     />
   );
 }

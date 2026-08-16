@@ -17,7 +17,7 @@ function VerbsPage() {
       title={t("verbs")}
       description={t("verbsDesc")}
       icon={Activity}
-      iconTint="from-emerald-300 to-violet-300"
+      iconTint="from-emerald-300 to-lime-300"
     />
   );
 }
