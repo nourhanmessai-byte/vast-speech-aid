@@ -38,14 +38,14 @@ function Home() {
       <div className="grid grid-cols-2 gap-3">
         <CategoryCard to="/fruits" emoji="🍎" tint="from-rose-200 to-amber-100" title={t("fruits")} desc={t("fruitsDesc")} />
         <CategoryCard to="/legumes" emoji="🥕" tint="from-emerald-200 to-lime-100" title={t("vegetables")} desc={t("vegetablesDesc")} />
-        <CategoryCard to="/numbers" emoji="🔢" tint="from-violet-200 to-indigo-100" title={t("numbers")} desc={t("numbersDesc")} />
-        <CategoryCard to="/days" emoji="📅" tint="from-sky-200 to-violet-100" title={t("days")} desc={t("daysDesc")} />
-        <CategoryCard to="/months" emoji="🗓️" tint="from-pink-200 to-violet-100" title={t("months")} desc={t("monthsDesc")} />
-        <CategoryCard to="/verbs" emoji="🏃" tint="from-emerald-200 to-violet-100" title={t("verbs")} desc={t("verbsDesc")} />
-        <CategoryCard to="/classify" emoji="🧩" tint="from-violet-200 to-fuchsia-100" title={t("classify")} desc={t("classifyDesc")} />
+        <CategoryCard to="/numbers" emoji="🔢" tint="from-emerald-200 to-teal-100" title={t("numbers")} desc={t("numbersDesc")} />
+        <CategoryCard to="/days" emoji="📅" tint="from-emerald-200 to-green-100" title={t("days")} desc={t("daysDesc")} />
+        <CategoryCard to="/months" emoji="🗓️" tint="from-teal-200 to-emerald-100" title={t("months")} desc={t("monthsDesc")} />
+        <CategoryCard to="/verbs" emoji="🏃" tint="from-emerald-200 to-lime-100" title={t("verbs")} desc={t("verbsDesc")} />
+        <CategoryCard to="/classify" emoji="🧩" tint="from-teal-200 to-green-100" title={t("classify")} desc={t("classifyDesc")} />
         <CategoryCard to="/animals" emoji="🐶" tint="from-amber-200 to-rose-100" title={t("animals")} desc={t("animalsDesc")} />
         <CategoryCard to="/furniture" emoji="🛋️" tint="from-stone-200 to-amber-100" title={t("furniture")} desc={t("furnitureDesc")} />
-        <CategoryCard to="/objects" emoji="🔑" tint="from-sky-200 to-violet-100" title={t("objects")} desc={t("objectsDesc")} />
+        <CategoryCard to="/objects" emoji="🔑" tint="from-green-200 to-emerald-100" title={t("objects")} desc={t("objectsDesc")} />
       </div>
 
       <section className="grid grid-cols-2 gap-3">
